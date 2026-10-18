@@ -41,7 +41,7 @@ order = data['featured'] + [w['id'] for w in works if w['id'] not in data['featu
 tiles = []
 for n, i in enumerate(order):
     w = by_id[i]
-    tiles.append(f'''      <a class="tile{' extra' if n >= SHOW else ''}" data-cat="{slug(w["cat"])}" {attrs(w)}>
+    tiles.append(f'''      <a class="tile{' extra' if n >= SHOW else ''}" data-group="{slug(w["cat"])}" {attrs(w)}>
         <img src="img/{i}-s.jpg" alt="" loading="lazy" width="720" height="405">
         <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
         <span class="cap"><strong{lang(full(w))}>{e(full(w))}</strong><span>{e(LABEL[w["cat"]])}</span></span>

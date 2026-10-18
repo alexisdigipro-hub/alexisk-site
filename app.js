@@ -20,7 +20,7 @@
     const f = b.dataset.filter;
     $$('.filters button').forEach((x) => x.classList.toggle('on', x === b));
     grid.classList.toggle('all', f !== 'all');   // a category shows all of its films
-    tiles.forEach((t) => t.classList.toggle('off', f !== 'all' && t.dataset.cat !== f));
+    tiles.forEach((t) => t.classList.toggle('off', f !== 'all' && t.dataset.group !== f));
     animate(tiles.filter((t) => t.offsetParent));
   }));
   const more = $('[data-more]');
