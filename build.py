@@ -28,27 +28,21 @@ def attrs(w):
             f'data-src="{w["src"]}" data-title="{e(full(w))}" data-cat="{e(w["cat"])}"')
 
 
-strip = []
-for n, i in enumerate(data['featured']):
-    w = by_id[i]
-    strip.append(f'''      <a class="frame" {attrs(w)} data-cursor="Play" draggable="false">
-        <span class="ph"><img src="img/{i}.jpg" alt="Still from {e(full(w))}" loading="lazy" width="1600" height="900" draggable="false"></span>
-        <span class="frame-cap"><span class="frame-t"{lang(full(w))}>{e(full(w))}</span><span class="mono">{n + 1:02d} / {len(data["featured"]):02d}</span></span>
-      </a>''')
-
 cats = ['Commercial', 'Music Video', 'Fashion & Art', 'Documentary']
 count = {c: sum(w['cat'] == c for w in works) for c in cats}
 filters = [f'        <button type="button" class="chip" data-filter="all" aria-pressed="true">All <sup>{len(works)}</sup></button>']
 filters += [f'        <button type="button" class="chip" data-filter="{slug(c)}" aria-pressed="false">{e(c)} <sup>{count[c]}</sup></button>' for c in cats]
 
-rows = []
-for n, w in enumerate(works):
-    rows.append(f'''      <li class="row" data-cat="{slug(w["cat"])}">
-        <a class="row-a" {attrs(w)} data-img="img/{w["id"]}-s.jpg" data-cursor="Play">
-          <span class="row-n mono">{n + 1:02d}</span>
-          <span class="row-thumb"><img src="img/{w["id"]}-s.jpg" alt="" loading="lazy" width="720" height="405"></span>
-          <span class="row-t"{lang(full(w))}>{e(w["title"])}{f' <em>{e(w["sub"])}</em>' if w.get("sub") else ''}</span>
-          <span class="row-c mono">{e(w["cat"])}</span>
+# featured films first, then the rest in their original order
+order = data['featured'] + [w['id'] for w in works if w['id'] not in data['featured']]
+cards = []
+for n, i in enumerate(order):
+    w = by_id[i]
+    cards.append(f'''      <li class="card{' extra' if n >= 12 else ''}" data-cat="{slug(w["cat"])}">
+        <a {attrs(w)}>
+          <span class="ph"><img src="img/{i}-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+          <span class="card-t"{lang(full(w))}>{e(w["title"])}{f' <em>{e(w["sub"])}</em>' if w.get("sub") else ''}</span>
+          <span class="card-c">{e(w["cat"])}</span>
         </a>
       </li>''')
 
@@ -60,7 +54,7 @@ marquee = ''.join(f'<span>{e(c)}</span><i>✦</i>' for c in clients)
 
 out = (ROOT / 'template.html').read_text(encoding='utf-8')
 for k, v in {
-    'STRIP': '\n'.join(strip), 'FILTERS': '\n'.join(filters), 'ROWS': '\n'.join(rows),
+    'CARDS': '\n'.join(cards), 'FILTERS': '\n'.join(filters), 
     'COUNT': str(len(works)),
     'N_COMMERCIAL': str(count['Commercial']), 'N_MUSIC': str(count['Music Video']),
     'N_ART': str(count['Fashion & Art']), 'N_DOC': str(count['Documentary']),
