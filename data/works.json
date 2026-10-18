@@ -1,43 +1,273 @@
 {
-  "showreel": { "id": "3255", "title": "Showreel", "src": "yt:kpIHiBkN5Og" },
-  "featured": ["3544", "3542", "3399", "3352"],
-  "hero": ["3542", "3544", "3238", "3399", "3255", "3539", "3271", "3352"],
+  "showreel": {
+    "id": "3255",
+    "title": "Showreel",
+    "src": "yt:kpIHiBkN5Og"
+  },
+  "featured": [
+    "3544",
+    "3542",
+    "3399",
+    "3352",
+    "3238",
+    "3539",
+    "3271",
+    "3404",
+    "3235",
+    "3213"
+  ],
   "works": [
-    { "id": "3544", "title": "Έβρος", "sub": "Trailer", "cat": "Documentary", "src": "yt:x2K8rYg7oN8" },
-    { "id": "3539", "title": "Anytime", "sub": "Smartdrive", "cat": "Commercial", "src": "yt:G7U5fQG0IeA" },
-    { "id": "3542", "title": "Νίκος Βέρτης", "sub": "Κοίτα", "cat": "Music Video", "src": "yt:i6Pagv3A0Rk" },
-    { "id": "3406", "title": "Anytime", "sub": "Home", "cat": "Commercial", "src": "yt:E6cgIhnxuOk" },
-    { "id": "3404", "title": "Lidl", "sub": "Plus App", "cat": "Commercial", "src": "yt:ZUnIIp8FUxc" },
-    { "id": "3402", "title": "Rythmos 94.9", "sub": "Mappes Show", "cat": "Commercial", "src": "yt:kP0-Y-DdwDU" },
-    { "id": "3399", "title": "Michalis Hatzigiannis", "sub": "", "cat": "Music Video", "src": "yt:1Y3h-3ka4bo" },
-    { "id": "3352", "title": "Aperol Spritz", "sub": "", "cat": "Commercial", "src": "yt:J6xyi0iE8KY" },
-    { "id": "3409", "title": "Media Strom", "sub": "", "cat": "Commercial", "src": "yt:meAvXDOXg0M" },
-    { "id": "3356", "title": "#eumemes", "sub": "", "cat": "Commercial", "src": "yt:xfd_9Tllp6E" },
-    { "id": "3340", "title": "Cholidis", "sub": "", "cat": "Music Video", "src": "yt:SaR6dMibzX0" },
-    { "id": "3346", "title": "Tresemmé", "sub": "", "cat": "Commercial", "src": "vimeo:364348936" },
-    { "id": "3201", "title": "Gree", "sub": "Air Conditioner", "cat": "Commercial", "src": "yt:95MQNNxvv1w" },
-    { "id": "3354", "title": "Christmas Theater", "sub": "", "cat": "Commercial", "src": "yt:ba_bR10gKRU" },
-    { "id": "3271", "title": "Paparizou", "sub": "", "cat": "Music Video", "src": "yt:uqmSrvt9JmY" },
-    { "id": "3184", "title": "Gree", "sub": "Limits", "cat": "Commercial", "src": "yt:FQ-w-qq4XlQ" },
-    { "id": "3197", "title": "Fluo Smartphones", "sub": "", "cat": "Commercial", "src": "yt:z-LZfkTOZeM" },
-    { "id": "3284", "title": "Carroten", "sub": "", "cat": "Music Video", "src": "yt:IzEiKi5P69A" },
-    { "id": "3240", "title": "Melisses", "sub": "Κρυφτό", "cat": "Music Video", "src": "yt:x56pIWkL3AQ" },
-    { "id": "3227", "title": "Christodoulou Juice", "sub": "", "cat": "Commercial", "src": "yt:7gSJOkG0Obo" },
-    { "id": "3242", "title": "Melisses", "sub": "", "cat": "Music Video", "src": "yt:95QMQbX_Ksc" },
-    { "id": "3225", "title": "ΟΠΕΚΕΠΕ", "sub": "", "cat": "Commercial", "src": "yt:ZLp12SywGY4" },
-    { "id": "3223", "title": "Gree", "sub": "Winter", "cat": "Commercial", "src": "yt:aLS7S3WE-Zg" },
-    { "id": "3221", "title": "Gree", "sub": "Classic", "cat": "Commercial", "src": "yt:tsR6b4ePS_A" },
-    { "id": "3210", "title": "Loumidis", "sub": "Papagalos", "cat": "Commercial", "src": "yt:Zv-k69_E-UA" },
-    { "id": "3238", "title": "Innocent", "sub": "", "cat": "Fashion & Art", "src": "yt:SP6UYJD-lkw" },
-    { "id": "3235", "title": "Water Lady", "sub": "", "cat": "Fashion & Art", "src": "yt:EGry_QH7aZs" },
-    { "id": "3199", "title": "Easy FM 97.2", "sub": "", "cat": "Commercial", "src": "yt:LJmFH1_buIs" },
-    { "id": "3342", "title": "Oikonomopoulos", "sub": "", "cat": "Music Video", "src": "yt:KfDkiPmk79w" },
-    { "id": "3282", "title": "Star Academy", "sub": "", "cat": "Commercial", "src": "vimeo:231087530" },
-    { "id": "3233", "title": "Adventure Rooms", "sub": "", "cat": "Commercial", "src": "yt:4etDC9aVXcg" },
-    { "id": "3286", "title": "Theodoridou", "sub": "", "cat": "Music Video", "src": "yt:K9JAykHMtmk" },
-    { "id": "3280", "title": "Alena", "sub": "", "cat": "Music Video", "src": "yt:K68UrdUOr2Y" },
-    { "id": "3207", "title": "Loumidis", "sub": "TVC", "cat": "Commercial", "src": "yt:eBuiWknA1tA" },
-    { "id": "3213", "title": "Stoiximan.gr", "sub": "Volleyball", "cat": "Commercial", "src": "yt:8hFElNZaDrM" },
-    { "id": "3276", "title": "Stan", "sub": "", "cat": "Music Video", "src": "yt:1Qrzd91rES4" }
+    {
+      "id": "3544",
+      "title": "Έβρος",
+      "sub": "Trailer",
+      "cat": "Documentary",
+      "src": "yt:x2K8rYg7oN8"
+    },
+    {
+      "id": "3539",
+      "title": "Anytime",
+      "sub": "Smartdrive",
+      "cat": "Commercial",
+      "src": "yt:G7U5fQG0IeA"
+    },
+    {
+      "id": "3542",
+      "title": "Νίκος Βέρτης",
+      "sub": "Κοίτα",
+      "cat": "Music Video",
+      "src": "yt:i6Pagv3A0Rk"
+    },
+    {
+      "id": "3406",
+      "title": "Anytime",
+      "sub": "Home",
+      "cat": "Commercial",
+      "src": "yt:E6cgIhnxuOk"
+    },
+    {
+      "id": "3404",
+      "title": "Lidl",
+      "sub": "Plus App",
+      "cat": "Commercial",
+      "src": "yt:ZUnIIp8FUxc"
+    },
+    {
+      "id": "3402",
+      "title": "Rythmos 94.9",
+      "sub": "Mappes Show",
+      "cat": "Commercial",
+      "src": "yt:kP0-Y-DdwDU"
+    },
+    {
+      "id": "3399",
+      "title": "Michalis Hatzigiannis",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:1Y3h-3ka4bo"
+    },
+    {
+      "id": "3352",
+      "title": "Aperol Spritz",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:J6xyi0iE8KY"
+    },
+    {
+      "id": "3409",
+      "title": "Media Strom",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:meAvXDOXg0M"
+    },
+    {
+      "id": "3356",
+      "title": "#eumemes",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:xfd_9Tllp6E"
+    },
+    {
+      "id": "3340",
+      "title": "Cholidis",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:SaR6dMibzX0"
+    },
+    {
+      "id": "3346",
+      "title": "Tresemmé",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "vimeo:364348936"
+    },
+    {
+      "id": "3201",
+      "title": "Gree",
+      "sub": "Air Conditioner",
+      "cat": "Commercial",
+      "src": "yt:95MQNNxvv1w"
+    },
+    {
+      "id": "3354",
+      "title": "Christmas Theater",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:ba_bR10gKRU"
+    },
+    {
+      "id": "3271",
+      "title": "Paparizou",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:uqmSrvt9JmY"
+    },
+    {
+      "id": "3184",
+      "title": "Gree",
+      "sub": "Limits",
+      "cat": "Commercial",
+      "src": "yt:FQ-w-qq4XlQ"
+    },
+    {
+      "id": "3197",
+      "title": "Fluo Smartphones",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:z-LZfkTOZeM"
+    },
+    {
+      "id": "3284",
+      "title": "Carroten",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:IzEiKi5P69A"
+    },
+    {
+      "id": "3240",
+      "title": "Melisses",
+      "sub": "Κρυφτό",
+      "cat": "Music Video",
+      "src": "yt:x56pIWkL3AQ"
+    },
+    {
+      "id": "3227",
+      "title": "Christodoulou Juice",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:7gSJOkG0Obo"
+    },
+    {
+      "id": "3242",
+      "title": "Melisses",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:95QMQbX_Ksc"
+    },
+    {
+      "id": "3225",
+      "title": "ΟΠΕΚΕΠΕ",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:ZLp12SywGY4"
+    },
+    {
+      "id": "3223",
+      "title": "Gree",
+      "sub": "Winter",
+      "cat": "Commercial",
+      "src": "yt:aLS7S3WE-Zg"
+    },
+    {
+      "id": "3221",
+      "title": "Gree",
+      "sub": "Classic",
+      "cat": "Commercial",
+      "src": "yt:tsR6b4ePS_A"
+    },
+    {
+      "id": "3210",
+      "title": "Loumidis",
+      "sub": "Papagalos",
+      "cat": "Commercial",
+      "src": "yt:Zv-k69_E-UA"
+    },
+    {
+      "id": "3238",
+      "title": "Innocent",
+      "sub": "",
+      "cat": "Fashion & Art",
+      "src": "yt:SP6UYJD-lkw"
+    },
+    {
+      "id": "3235",
+      "title": "Water Lady",
+      "sub": "",
+      "cat": "Fashion & Art",
+      "src": "yt:EGry_QH7aZs"
+    },
+    {
+      "id": "3199",
+      "title": "Easy FM 97.2",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:LJmFH1_buIs"
+    },
+    {
+      "id": "3342",
+      "title": "Oikonomopoulos",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:KfDkiPmk79w"
+    },
+    {
+      "id": "3282",
+      "title": "Star Academy",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "vimeo:231087530"
+    },
+    {
+      "id": "3233",
+      "title": "Adventure Rooms",
+      "sub": "",
+      "cat": "Commercial",
+      "src": "yt:4etDC9aVXcg"
+    },
+    {
+      "id": "3286",
+      "title": "Theodoridou",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:K9JAykHMtmk"
+    },
+    {
+      "id": "3280",
+      "title": "Alena",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:K68UrdUOr2Y"
+    },
+    {
+      "id": "3207",
+      "title": "Loumidis",
+      "sub": "TVC",
+      "cat": "Commercial",
+      "src": "yt:eBuiWknA1tA"
+    },
+    {
+      "id": "3213",
+      "title": "Stoiximan.gr",
+      "sub": "Volleyball",
+      "cat": "Commercial",
+      "src": "yt:8hFElNZaDrM"
+    },
+    {
+      "id": "3276",
+      "title": "Stan",
+      "sub": "",
+      "cat": "Music Video",
+      "src": "yt:1Qrzd91rES4"
+    }
   ]
 }

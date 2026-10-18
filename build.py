@@ -28,24 +28,13 @@ def attrs(w):
             f'data-src="{w["src"]}" data-title="{e(full(w))}" data-cat="{e(w["cat"])}"')
 
 
-hero = '\n'.join(
-    f'      <img src="img/{i}.jpg" alt="" width="1600" height="900" data-title="{e(full(by_id[i]))}"'
-    + (' fetchpriority="high"' if n == 0 else ' loading="lazy"') + (' class="on"' if n == 0 else '') + '>'
-    for n, i in enumerate(data['hero']))
-
-featured = []
+strip = []
 for n, i in enumerate(data['featured']):
     w = by_id[i]
-    featured.append(f'''    <article class="feat{' feat-r' if n % 2 else ''}">
-      <a class="feat-media" {attrs(w)} data-cursor="Play">
-        <span class="gate"><img src="img/{i}.jpg" alt="Still from {e(full(w))}" loading="lazy" width="1600" height="900"></span>
-      </a>
-      <div class="feat-cap">
-        <span class="mono feat-n">{n + 1:02d}</span>
-        <h3 class="feat-t"{lang(full(w))}>{e(w["title"])}{f' <em>{e(w["sub"])}</em>' if w.get("sub") else ''}</h3>
-        <span class="mono feat-c">{e(w["cat"])}</span>
-      </div>
-    </article>''')
+    strip.append(f'''      <a class="frame" {attrs(w)} data-cursor="Play" draggable="false">
+        <span class="ph"><img src="img/{i}.jpg" alt="Still from {e(full(w))}" loading="lazy" width="1600" height="900" draggable="false"></span>
+        <span class="frame-cap"><span class="frame-t"{lang(full(w))}>{e(full(w))}</span><span class="mono">{n + 1:02d} / {len(data["featured"]):02d}</span></span>
+      </a>''')
 
 cats = ['Commercial', 'Music Video', 'Fashion & Art', 'Documentary']
 count = {c: sum(w['cat'] == c for w in works) for c in cats}
@@ -60,7 +49,6 @@ for n, w in enumerate(works):
           <span class="row-thumb"><img src="img/{w["id"]}-s.jpg" alt="" loading="lazy" width="720" height="405"></span>
           <span class="row-t"{lang(full(w))}>{e(w["title"])}{f' <em>{e(w["sub"])}</em>' if w.get("sub") else ''}</span>
           <span class="row-c mono">{e(w["cat"])}</span>
-          <span class="row-go mono" aria-hidden="true">Play ↗</span>
         </a>
       </li>''')
 
@@ -72,9 +60,8 @@ marquee = ''.join(f'<span>{e(c)}</span><i>✦</i>' for c in clients)
 
 out = (ROOT / 'template.html').read_text(encoding='utf-8')
 for k, v in {
-    'HERO0': data['hero'][0], 'HERO': hero, 'HEROCOUNT': f'{len(data["hero"]):02d}',
-    'FEATURED': '\n'.join(featured), 'FILTERS': '\n'.join(filters), 'ROWS': '\n'.join(rows),
-    'MARQUEE': marquee, 'CLIENTS': e(', '.join(clients)), 'COUNT': str(len(works)),
+    'STRIP': '\n'.join(strip), 'FILTERS': '\n'.join(filters), 'ROWS': '\n'.join(rows),
+    'COUNT': str(len(works)),
     'N_COMMERCIAL': str(count['Commercial']), 'N_MUSIC': str(count['Music Video']),
     'N_ART': str(count['Fashion & Art']), 'N_DOC': str(count['Documentary']),
     'VER': time.strftime('%Y%m%d%H%M'),
