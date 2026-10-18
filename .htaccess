@@ -1,0 +1,15 @@
+# Old WordPress links (video pages, categories, feeds, admin) go to the new home page
+RewriteEngine On
+RewriteRule ^(video|video-category|page|feed|comments|wp-admin|wp-content|wp-includes|wp-login\.php|xmlrpc\.php)(/.*)?$ / [R=301,L]
+
+# Cache images, CSS and JS (CSS/JS are cache-busted with ?v= on every build)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# Source files used only to build the page stay private
+RewriteRule ^(build\.py|template\.html|data/|README\.md|\.git) - [R=404,L]

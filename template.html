@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alex Konstantinidis · Director</title>
+<meta name="description" content="Alex Konstantinidis, aka Alex Kayne. Director of commercials, music videos and documentary. {{COUNT}} films for brands and artists.">
+<meta name="theme-color" content="#0b0907">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alex Konstantinidis · Director">
+<meta property="og:description" content="Commercials, music videos and documentary. Watch the reel.">
+<meta property="og:image" content="https://alexisk.gr/img/3542.jpg">
+<meta property="og:url" content="https://alexisk.gr/">
+<link rel="canonical" href="https://alexisk.gr/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@500;700;800&family=Fira+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+Display:ital,wght@1,300;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/{{HERO0}}.jpg" fetchpriority="high">
+<link rel="stylesheet" href="style.css?v={{VER}}">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#work">Skip to work</a>
+
+<header class="top">
+  <a class="brand" href="#top" aria-label="Alex Konstantinidis, back to top">
+    <span class="brand-mark" aria-hidden="true">AK</span>
+    <span class="brand-name">Alex Konstantinidis</span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#work">Work</a>
+    <a href="#index">Index</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <span class="clock mono" aria-label="Local time in Greece"><i class="rec" aria-hidden="true"></i><span data-clock>--:--</span> GR</span>
+</header>
+
+<main>
+  <section class="hero" id="top" aria-label="Intro">
+    <div class="hero-frames" aria-hidden="true">
+{{HERO}}
+    </div>
+    <div class="hero-light" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
+
+    <div class="hero-in">
+      <p class="hero-kick mono"><span>Director</span><span>Commercials · Music Videos · Documentary</span></p>
+      <h1 class="hero-title">
+        <span class="ln"><span class="split">Alex</span></span>
+        <span class="ln"><span class="split">Konstantinidis</span></span>
+      </h1>
+      <div class="hero-row">
+        <p class="aka"><em>aka</em> Alex Kayne</p>
+        <a class="reel" href="https://www.youtube.com/watch?v=kpIHiBkN5Og" data-play="showreel" data-cursor="Play">
+          <span class="reel-dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
+          <span class="reel-txt">Play the showreel</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-foot mono" aria-hidden="true">
+      <span class="hf-now">Now projecting <b data-hero-title></b></span>
+      <span class="hf-count"><b data-hero-n>01</b> / {{HEROCOUNT}}</span>
+      <span class="hf-tc" data-tc>00:00:00:00</span>
+    </div>
+  </section>
+
+  <section class="statement" aria-label="About the work">
+    <p class="state-lead">
+      <span class="mono state-label">( 01 ) The work</span>
+      I make films that move people and products. <em>{{COUNT}} so far</em>, for brands like Lidl, Aperol and Stoiximan, for artists from Michalis Hatzigiannis to Paparizou, and one documentary at the edge of the Evros river.
+    </p>
+    <ul class="stats" role="list">
+      <li><b data-count="{{N_COMMERCIAL}}">{{N_COMMERCIAL}}</b><span class="mono">Commercials</span></li>
+      <li><b data-count="{{N_MUSIC}}">{{N_MUSIC}}</b><span class="mono">Music videos</span></li>
+      <li><b data-count="{{N_ART}}">{{N_ART}}</b><span class="mono">Fashion &amp; art</span></li>
+      <li><b data-count="{{N_DOC}}">{{N_DOC}}</b><span class="mono">Documentary</span></li>
+    </ul>
+  </section>
+
+  <section class="selected" id="work" aria-labelledby="sel-h">
+    <div class="sec-head">
+      <span class="mono">( 02 ) Selected</span>
+      <h2 id="sel-h" class="split">Selected films</h2>
+    </div>
+{{FEATURED}}
+  </section>
+
+  <section class="index" id="index" aria-labelledby="idx-h">
+    <div class="sec-head idx-head">
+      <span class="mono">( 03 ) Index</span>
+      <h2 id="idx-h" class="split">Everything</h2>
+      <div class="filters" role="group" aria-label="Filter by category">
+{{FILTERS}}
+      </div>
+    </div>
+    <ol class="rows" role="list">
+{{ROWS}}
+    </ol>
+    <p class="rows-empty mono" hidden>Nothing here yet.</p>
+  </section>
+
+  <section class="clients" aria-label="Brands and artists">
+    <div class="marquee" aria-hidden="true"><div class="marquee-track">{{MARQUEE}}{{MARQUEE}}</div></div>
+    <p class="sr-only">Brands and artists: {{CLIENTS}}.</p>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-h">
+    <div class="about-img">
+      <img src="img/3542.jpg" alt="Still from Nikos Vertis, Koita: a man in an empty cinema, lit by the projector" loading="lazy" width="1600" height="900">
+    </div>
+    <div class="about-txt">
+      <span class="mono">( 04 ) About</span>
+      <h2 id="about-h" class="split">Behind the camera</h2>
+      <p>I'm Alex Konstantinidis, also known as Alex Kayne. I direct commercials, music videos, fashion films and documentary, and I treat a thirty second spot with the same care as a feature: casting, light, rhythm, the cut.</p>
+      <p>From national campaigns to an intimate documentary about the people of Evros, the goal stays the same. One strong image, held for exactly as long as it needs.</p>
+      <ul class="disc mono" role="list">
+        <li>Direction</li><li>Concept &amp; script</li><li>Music videos</li><li>Commercials</li><li>Documentary</li><li>Fashion films</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="contact" id="contact">
+  <span class="mono">( 05 ) Contact</span>
+  <p class="contact-q">Have a new project?</p>
+  <a class="mail" href="mailto:alexisk@outlook.com" data-cursor="Write"><span>alexisk@</span><span>outlook.com</span></a>
+  <div class="contact-row">
+    <ul class="social mono" role="list">
+      <li><a href="https://vimeo.com/alexiskon" target="_blank" rel="noopener">Vimeo</a></li>
+      <li><a href="https://www.youtube.com/channel/UCXuOsT1pBWOY_d70Nmb1ZPg" target="_blank" rel="noopener">YouTube</a></li>
+      <li><a href="https://www.instagram.com/iam_alexkon/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.facebook.com/alexiskonstantinidis" target="_blank" rel="noopener">Facebook</a></li>
+    </ul>
+    <p class="mono foot-note">© <span data-year>2026</span> Alex Konstantinidis · aka Alex Kayne</p>
+    <a class="mono to-top" href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<dialog class="player" aria-label="Video player">
+  <div class="player-bar mono">
+    <span class="player-meta"><b data-p-title></b> <span data-p-cat></span></span>
+    <span class="player-ctl">
+      <button type="button" data-p-prev aria-label="Previous film">← Prev</button>
+      <button type="button" data-p-next aria-label="Next film">Next →</button>
+      <button type="button" data-p-close aria-label="Close player">Close ✕</button>
+    </span>
+  </div>
+  <div class="player-screen"><div class="player-frame" data-p-frame></div></div>
+</dialog>
+
+<div class="preview" aria-hidden="true"><div class="preview-in"><img alt="" data-preview></div></div>
+<div class="cur" aria-hidden="true"><span class="cur-label"></span></div>
+<div class="grain" aria-hidden="true"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" defer></script>
+<script src="app.js?v={{VER}}" defer></script>
+</body>
+</html>
