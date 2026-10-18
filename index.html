@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/alex.webp" type="image/webp" fetchpriority="high">
-<link rel="stylesheet" href="style.css?v=202610182318">
+<link rel="stylesheet" href="style.css?v=202610190050">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -54,269 +54,246 @@
         <h2 id="work-h">Work</h2>
         <p class="sec-sub">36 films for brands and artists. Click any film to watch it.</p>
       </div>
-      <div class="filters" role="group" aria-label="Filter by category">
-        <button type="button" class="chip" data-filter="all" aria-pressed="true">All <sup>36</sup></button>
-        <button type="button" class="chip" data-filter="commercial" aria-pressed="false">Commercial <sup>22</sup></button>
-        <button type="button" class="chip" data-filter="music-video" aria-pressed="false">Music Video <sup>11</sup></button>
-        <button type="button" class="chip" data-filter="fashion-art" aria-pressed="false">Fashion &amp; Art <sup>2</sup></button>
-        <button type="button" class="chip" data-filter="documentary" aria-pressed="false">Documentary <sup>1</sup></button>
-      </div>
+      <nav class="tabs" aria-label="Jump to a category">
+        <a class="chip" href="#commercials">Commercials <sup>22</sup></a>
+        <a class="chip" href="#music-videos">Music videos <sup>11</sup></a>
+        <a class="chip" href="#documentary-fashion">Documentary &amp; fashion <sup>3</sup></a>
+      </nav>
     </div>
-    <ul class="grid" role="list">
-      <li class="card" data-cat="documentary">
-        <a href="https://www.youtube.com/watch?v=x2K8rYg7oN8" target="_blank" rel="noopener" data-play="3544" data-src="yt:x2K8rYg7oN8" data-title="Έβρος · Trailer" data-cat="Documentary">
-          <span class="ph"><img src="img/3544-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t" lang="el">Έβρος <em>Trailer</em></span>
-          <span class="card-c">Documentary</span>
-        </a>
-      </li>
-      <li class="card" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=i6Pagv3A0Rk" target="_blank" rel="noopener" data-play="3542" data-src="yt:i6Pagv3A0Rk" data-title="Νίκος Βέρτης · Κοίτα" data-cat="Music Video">
-          <span class="ph"><img src="img/3542-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t" lang="el">Νίκος Βέρτης <em>Κοίτα</em></span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=1Y3h-3ka4bo" target="_blank" rel="noopener" data-play="3399" data-src="yt:1Y3h-3ka4bo" data-title="Michalis Hatzigiannis" data-cat="Music Video">
-          <span class="ph"><img src="img/3399-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Michalis Hatzigiannis</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=J6xyi0iE8KY" target="_blank" rel="noopener" data-play="3352" data-src="yt:J6xyi0iE8KY" data-title="Aperol Spritz" data-cat="Commercial">
-          <span class="ph"><img src="img/3352-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Aperol Spritz</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card" data-cat="fashion-art">
-        <a href="https://www.youtube.com/watch?v=SP6UYJD-lkw" target="_blank" rel="noopener" data-play="3238" data-src="yt:SP6UYJD-lkw" data-title="Innocent" data-cat="Fashion &amp; Art">
-          <span class="ph"><img src="img/3238-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Innocent</span>
-          <span class="card-c">Fashion &amp; Art</span>
-        </a>
-      </li>
-      <li class="card" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=G7U5fQG0IeA" target="_blank" rel="noopener" data-play="3539" data-src="yt:G7U5fQG0IeA" data-title="Anytime · Smartdrive" data-cat="Commercial">
-          <span class="ph"><img src="img/3539-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Anytime <em>Smartdrive</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=uqmSrvt9JmY" target="_blank" rel="noopener" data-play="3271" data-src="yt:uqmSrvt9JmY" data-title="Paparizou" data-cat="Music Video">
-          <span class="ph"><img src="img/3271-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Paparizou</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=ZUnIIp8FUxc" target="_blank" rel="noopener" data-play="3404" data-src="yt:ZUnIIp8FUxc" data-title="Lidl · Plus App" data-cat="Commercial">
-          <span class="ph"><img src="img/3404-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Lidl <em>Plus App</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card" data-cat="fashion-art">
-        <a href="https://www.youtube.com/watch?v=EGry_QH7aZs" target="_blank" rel="noopener" data-play="3235" data-src="yt:EGry_QH7aZs" data-title="Water Lady" data-cat="Fashion &amp; Art">
-          <span class="ph"><img src="img/3235-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Water Lady</span>
-          <span class="card-c">Fashion &amp; Art</span>
-        </a>
-      </li>
-      <li class="card" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=8hFElNZaDrM" target="_blank" rel="noopener" data-play="3213" data-src="yt:8hFElNZaDrM" data-title="Stoiximan.gr · Volleyball" data-cat="Commercial">
-          <span class="ph"><img src="img/3213-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Stoiximan.gr <em>Volleyball</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=E6cgIhnxuOk" target="_blank" rel="noopener" data-play="3406" data-src="yt:E6cgIhnxuOk" data-title="Anytime · Home" data-cat="Commercial">
-          <span class="ph"><img src="img/3406-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Anytime <em>Home</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=kP0-Y-DdwDU" target="_blank" rel="noopener" data-play="3402" data-src="yt:kP0-Y-DdwDU" data-title="Rythmos 94.9 · Mappes Show" data-cat="Commercial">
-          <span class="ph"><img src="img/3402-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Rythmos 94.9 <em>Mappes Show</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=meAvXDOXg0M" target="_blank" rel="noopener" data-play="3409" data-src="yt:meAvXDOXg0M" data-title="Media Strom" data-cat="Commercial">
-          <span class="ph"><img src="img/3409-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Media Strom</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=xfd_9Tllp6E" target="_blank" rel="noopener" data-play="3356" data-src="yt:xfd_9Tllp6E" data-title="#eumemes" data-cat="Commercial">
-          <span class="ph"><img src="img/3356-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">#eumemes</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=SaR6dMibzX0" target="_blank" rel="noopener" data-play="3340" data-src="yt:SaR6dMibzX0" data-title="Cholidis" data-cat="Music Video">
-          <span class="ph"><img src="img/3340-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Cholidis</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://vimeo.com/364348936" target="_blank" rel="noopener" data-play="3346" data-src="vimeo:364348936" data-title="Tresemmé" data-cat="Commercial">
-          <span class="ph"><img src="img/3346-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Tresemmé</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=95MQNNxvv1w" target="_blank" rel="noopener" data-play="3201" data-src="yt:95MQNNxvv1w" data-title="Gree · Air Conditioner" data-cat="Commercial">
-          <span class="ph"><img src="img/3201-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Gree <em>Air Conditioner</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=ba_bR10gKRU" target="_blank" rel="noopener" data-play="3354" data-src="yt:ba_bR10gKRU" data-title="Christmas Theater" data-cat="Commercial">
-          <span class="ph"><img src="img/3354-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Christmas Theater</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=FQ-w-qq4XlQ" target="_blank" rel="noopener" data-play="3184" data-src="yt:FQ-w-qq4XlQ" data-title="Gree · Limits" data-cat="Commercial">
-          <span class="ph"><img src="img/3184-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Gree <em>Limits</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=z-LZfkTOZeM" target="_blank" rel="noopener" data-play="3197" data-src="yt:z-LZfkTOZeM" data-title="Fluo Smartphones" data-cat="Commercial">
-          <span class="ph"><img src="img/3197-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Fluo Smartphones</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=IzEiKi5P69A" target="_blank" rel="noopener" data-play="3284" data-src="yt:IzEiKi5P69A" data-title="Carroten" data-cat="Music Video">
-          <span class="ph"><img src="img/3284-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Carroten</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=x56pIWkL3AQ" target="_blank" rel="noopener" data-play="3240" data-src="yt:x56pIWkL3AQ" data-title="Melisses · Κρυφτό" data-cat="Music Video">
-          <span class="ph"><img src="img/3240-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t" lang="el">Melisses <em>Κρυφτό</em></span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=7gSJOkG0Obo" target="_blank" rel="noopener" data-play="3227" data-src="yt:7gSJOkG0Obo" data-title="Christodoulou Juice" data-cat="Commercial">
-          <span class="ph"><img src="img/3227-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Christodoulou Juice</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=95QMQbX_Ksc" target="_blank" rel="noopener" data-play="3242" data-src="yt:95QMQbX_Ksc" data-title="Melisses" data-cat="Music Video">
-          <span class="ph"><img src="img/3242-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Melisses</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=ZLp12SywGY4" target="_blank" rel="noopener" data-play="3225" data-src="yt:ZLp12SywGY4" data-title="ΟΠΕΚΕΠΕ" data-cat="Commercial">
-          <span class="ph"><img src="img/3225-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t" lang="el">ΟΠΕΚΕΠΕ</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=aLS7S3WE-Zg" target="_blank" rel="noopener" data-play="3223" data-src="yt:aLS7S3WE-Zg" data-title="Gree · Winter" data-cat="Commercial">
-          <span class="ph"><img src="img/3223-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Gree <em>Winter</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=tsR6b4ePS_A" target="_blank" rel="noopener" data-play="3221" data-src="yt:tsR6b4ePS_A" data-title="Gree · Classic" data-cat="Commercial">
-          <span class="ph"><img src="img/3221-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Gree <em>Classic</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=Zv-k69_E-UA" target="_blank" rel="noopener" data-play="3210" data-src="yt:Zv-k69_E-UA" data-title="Loumidis · Papagalos" data-cat="Commercial">
-          <span class="ph"><img src="img/3210-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Loumidis <em>Papagalos</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=LJmFH1_buIs" target="_blank" rel="noopener" data-play="3199" data-src="yt:LJmFH1_buIs" data-title="Easy FM 97.2" data-cat="Commercial">
-          <span class="ph"><img src="img/3199-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Easy FM 97.2</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=KfDkiPmk79w" target="_blank" rel="noopener" data-play="3342" data-src="yt:KfDkiPmk79w" data-title="Oikonomopoulos" data-cat="Music Video">
-          <span class="ph"><img src="img/3342-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Oikonomopoulos</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://vimeo.com/231087530" target="_blank" rel="noopener" data-play="3282" data-src="vimeo:231087530" data-title="Star Academy" data-cat="Commercial">
-          <span class="ph"><img src="img/3282-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Star Academy</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=4etDC9aVXcg" target="_blank" rel="noopener" data-play="3233" data-src="yt:4etDC9aVXcg" data-title="Adventure Rooms" data-cat="Commercial">
-          <span class="ph"><img src="img/3233-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Adventure Rooms</span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=K9JAykHMtmk" target="_blank" rel="noopener" data-play="3286" data-src="yt:K9JAykHMtmk" data-title="Theodoridou" data-cat="Music Video">
-          <span class="ph"><img src="img/3286-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Theodoridou</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=K68UrdUOr2Y" target="_blank" rel="noopener" data-play="3280" data-src="yt:K68UrdUOr2Y" data-title="Alena" data-cat="Music Video">
-          <span class="ph"><img src="img/3280-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Alena</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="commercial">
-        <a href="https://www.youtube.com/watch?v=eBuiWknA1tA" target="_blank" rel="noopener" data-play="3207" data-src="yt:eBuiWknA1tA" data-title="Loumidis · TVC" data-cat="Commercial">
-          <span class="ph"><img src="img/3207-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Loumidis <em>TVC</em></span>
-          <span class="card-c">Commercial</span>
-        </a>
-      </li>
-      <li class="card extra" data-cat="music-video">
-        <a href="https://www.youtube.com/watch?v=1Qrzd91rES4" target="_blank" rel="noopener" data-play="3276" data-src="yt:1Qrzd91rES4" data-title="Stan" data-cat="Music Video">
-          <span class="ph"><img src="img/3276-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t">Stan</span>
-          <span class="card-c">Music Video</span>
-        </a>
-      </li>
-    </ul>
-    <div class="more-wrap"><button type="button" class="btn" data-more>Show all 36 films</button></div>
+    <div class="group" id="commercials">
+      <div class="group-head"><h3>Commercials</h3><span class="group-n">22 films</span></div>
+      <ul class="grid" role="list">
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=J6xyi0iE8KY" target="_blank" rel="noopener" data-play="3352" data-src="yt:J6xyi0iE8KY" data-title="Aperol Spritz" data-cat="Commercial">
+            <span class="ph"><img src="img/3352-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Aperol Spritz</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=G7U5fQG0IeA" target="_blank" rel="noopener" data-play="3539" data-src="yt:G7U5fQG0IeA" data-title="Anytime · Smartdrive" data-cat="Commercial">
+            <span class="ph"><img src="img/3539-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Anytime <em>Smartdrive</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=ZUnIIp8FUxc" target="_blank" rel="noopener" data-play="3404" data-src="yt:ZUnIIp8FUxc" data-title="Lidl · Plus App" data-cat="Commercial">
+            <span class="ph"><img src="img/3404-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Lidl <em>Plus App</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=8hFElNZaDrM" target="_blank" rel="noopener" data-play="3213" data-src="yt:8hFElNZaDrM" data-title="Stoiximan.gr · Volleyball" data-cat="Commercial">
+            <span class="ph"><img src="img/3213-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Stoiximan.gr <em>Volleyball</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=E6cgIhnxuOk" target="_blank" rel="noopener" data-play="3406" data-src="yt:E6cgIhnxuOk" data-title="Anytime · Home" data-cat="Commercial">
+            <span class="ph"><img src="img/3406-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Anytime <em>Home</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=kP0-Y-DdwDU" target="_blank" rel="noopener" data-play="3402" data-src="yt:kP0-Y-DdwDU" data-title="Rythmos 94.9 · Mappes Show" data-cat="Commercial">
+            <span class="ph"><img src="img/3402-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Rythmos 94.9 <em>Mappes Show</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=meAvXDOXg0M" target="_blank" rel="noopener" data-play="3409" data-src="yt:meAvXDOXg0M" data-title="Media Strom" data-cat="Commercial">
+            <span class="ph"><img src="img/3409-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Media Strom</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=xfd_9Tllp6E" target="_blank" rel="noopener" data-play="3356" data-src="yt:xfd_9Tllp6E" data-title="#eumemes" data-cat="Commercial">
+            <span class="ph"><img src="img/3356-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">#eumemes</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://vimeo.com/364348936" target="_blank" rel="noopener" data-play="3346" data-src="vimeo:364348936" data-title="Tresemmé" data-cat="Commercial">
+            <span class="ph"><img src="img/3346-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Tresemmé</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=95MQNNxvv1w" target="_blank" rel="noopener" data-play="3201" data-src="yt:95MQNNxvv1w" data-title="Gree · Air Conditioner" data-cat="Commercial">
+            <span class="ph"><img src="img/3201-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Gree <em>Air Conditioner</em></span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=ba_bR10gKRU" target="_blank" rel="noopener" data-play="3354" data-src="yt:ba_bR10gKRU" data-title="Christmas Theater" data-cat="Commercial">
+            <span class="ph"><img src="img/3354-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Christmas Theater</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=FQ-w-qq4XlQ" target="_blank" rel="noopener" data-play="3184" data-src="yt:FQ-w-qq4XlQ" data-title="Gree · Limits" data-cat="Commercial">
+            <span class="ph"><img src="img/3184-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Gree <em>Limits</em></span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=z-LZfkTOZeM" target="_blank" rel="noopener" data-play="3197" data-src="yt:z-LZfkTOZeM" data-title="Fluo Smartphones" data-cat="Commercial">
+            <span class="ph"><img src="img/3197-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Fluo Smartphones</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=7gSJOkG0Obo" target="_blank" rel="noopener" data-play="3227" data-src="yt:7gSJOkG0Obo" data-title="Christodoulou Juice" data-cat="Commercial">
+            <span class="ph"><img src="img/3227-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Christodoulou Juice</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=ZLp12SywGY4" target="_blank" rel="noopener" data-play="3225" data-src="yt:ZLp12SywGY4" data-title="ΟΠΕΚΕΠΕ" data-cat="Commercial">
+            <span class="ph"><img src="img/3225-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t" lang="el">ΟΠΕΚΕΠΕ</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=aLS7S3WE-Zg" target="_blank" rel="noopener" data-play="3223" data-src="yt:aLS7S3WE-Zg" data-title="Gree · Winter" data-cat="Commercial">
+            <span class="ph"><img src="img/3223-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Gree <em>Winter</em></span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=tsR6b4ePS_A" target="_blank" rel="noopener" data-play="3221" data-src="yt:tsR6b4ePS_A" data-title="Gree · Classic" data-cat="Commercial">
+            <span class="ph"><img src="img/3221-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Gree <em>Classic</em></span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=Zv-k69_E-UA" target="_blank" rel="noopener" data-play="3210" data-src="yt:Zv-k69_E-UA" data-title="Loumidis · Papagalos" data-cat="Commercial">
+            <span class="ph"><img src="img/3210-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Loumidis <em>Papagalos</em></span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=LJmFH1_buIs" target="_blank" rel="noopener" data-play="3199" data-src="yt:LJmFH1_buIs" data-title="Easy FM 97.2" data-cat="Commercial">
+            <span class="ph"><img src="img/3199-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Easy FM 97.2</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://vimeo.com/231087530" target="_blank" rel="noopener" data-play="3282" data-src="vimeo:231087530" data-title="Star Academy" data-cat="Commercial">
+            <span class="ph"><img src="img/3282-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Star Academy</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=4etDC9aVXcg" target="_blank" rel="noopener" data-play="3233" data-src="yt:4etDC9aVXcg" data-title="Adventure Rooms" data-cat="Commercial">
+            <span class="ph"><img src="img/3233-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Adventure Rooms</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=eBuiWknA1tA" target="_blank" rel="noopener" data-play="3207" data-src="yt:eBuiWknA1tA" data-title="Loumidis · TVC" data-cat="Commercial">
+            <span class="ph"><img src="img/3207-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Loumidis <em>TVC</em></span>
+          </a>
+        </li>
+      </ul>
+      <button type="button" class="btn more" data-more>Show all 22</button>
+    </div>
+    <div class="group" id="music-videos">
+      <div class="group-head"><h3>Music videos</h3><span class="group-n">11 films</span></div>
+      <ul class="grid" role="list">
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=i6Pagv3A0Rk" target="_blank" rel="noopener" data-play="3542" data-src="yt:i6Pagv3A0Rk" data-title="Νίκος Βέρτης · Κοίτα" data-cat="Music Video">
+            <span class="ph"><img src="img/3542-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t" lang="el">Νίκος Βέρτης <em>Κοίτα</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=1Y3h-3ka4bo" target="_blank" rel="noopener" data-play="3399" data-src="yt:1Y3h-3ka4bo" data-title="Michalis Hatzigiannis" data-cat="Music Video">
+            <span class="ph"><img src="img/3399-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Michalis Hatzigiannis</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=uqmSrvt9JmY" target="_blank" rel="noopener" data-play="3271" data-src="yt:uqmSrvt9JmY" data-title="Paparizou" data-cat="Music Video">
+            <span class="ph"><img src="img/3271-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Paparizou</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=SaR6dMibzX0" target="_blank" rel="noopener" data-play="3340" data-src="yt:SaR6dMibzX0" data-title="Cholidis" data-cat="Music Video">
+            <span class="ph"><img src="img/3340-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Cholidis</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=IzEiKi5P69A" target="_blank" rel="noopener" data-play="3284" data-src="yt:IzEiKi5P69A" data-title="Carroten" data-cat="Music Video">
+            <span class="ph"><img src="img/3284-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Carroten</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=x56pIWkL3AQ" target="_blank" rel="noopener" data-play="3240" data-src="yt:x56pIWkL3AQ" data-title="Melisses · Κρυφτό" data-cat="Music Video">
+            <span class="ph"><img src="img/3240-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t" lang="el">Melisses <em>Κρυφτό</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=95QMQbX_Ksc" target="_blank" rel="noopener" data-play="3242" data-src="yt:95QMQbX_Ksc" data-title="Melisses" data-cat="Music Video">
+            <span class="ph"><img src="img/3242-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Melisses</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=KfDkiPmk79w" target="_blank" rel="noopener" data-play="3342" data-src="yt:KfDkiPmk79w" data-title="Oikonomopoulos" data-cat="Music Video">
+            <span class="ph"><img src="img/3342-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Oikonomopoulos</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=K9JAykHMtmk" target="_blank" rel="noopener" data-play="3286" data-src="yt:K9JAykHMtmk" data-title="Theodoridou" data-cat="Music Video">
+            <span class="ph"><img src="img/3286-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Theodoridou</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=K68UrdUOr2Y" target="_blank" rel="noopener" data-play="3280" data-src="yt:K68UrdUOr2Y" data-title="Alena" data-cat="Music Video">
+            <span class="ph"><img src="img/3280-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Alena</span>
+          </a>
+        </li>
+        <li class="card extra">
+          <a href="https://www.youtube.com/watch?v=1Qrzd91rES4" target="_blank" rel="noopener" data-play="3276" data-src="yt:1Qrzd91rES4" data-title="Stan" data-cat="Music Video">
+            <span class="ph"><img src="img/3276-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Stan</span>
+          </a>
+        </li>
+      </ul>
+      <button type="button" class="btn more" data-more>Show all 11</button>
+    </div>
+    <div class="group" id="documentary-fashion">
+      <div class="group-head"><h3>Documentary &amp; fashion</h3><span class="group-n">3 films</span></div>
+      <ul class="grid" role="list">
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=x2K8rYg7oN8" target="_blank" rel="noopener" data-play="3544" data-src="yt:x2K8rYg7oN8" data-title="Έβρος · Trailer" data-cat="Documentary">
+            <span class="ph"><img src="img/3544-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t" lang="el">Έβρος <em>Trailer</em></span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=SP6UYJD-lkw" target="_blank" rel="noopener" data-play="3238" data-src="yt:SP6UYJD-lkw" data-title="Innocent" data-cat="Fashion &amp; Art">
+            <span class="ph"><img src="img/3238-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Innocent</span>
+          </a>
+        </li>
+        <li class="card">
+          <a href="https://www.youtube.com/watch?v=EGry_QH7aZs" target="_blank" rel="noopener" data-play="3235" data-src="yt:EGry_QH7aZs" data-title="Water Lady" data-cat="Fashion &amp; Art">
+            <span class="ph"><img src="img/3235-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t">Water Lady</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
   </section>
 
   <section class="about" id="about" aria-labelledby="about-h">
@@ -362,6 +339,6 @@
   <div class="player-screen"><div class="player-frame" data-p-frame></div></div>
 </dialog>
 
-<script src="app.js?v=202610182318" defer></script>
+<script src="app.js?v=202610190050" defer></script>
 </body>
 </html>

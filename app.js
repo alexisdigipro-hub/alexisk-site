@@ -21,24 +21,13 @@
   };
   onScroll(); addEventListener('scroll', onScroll, { passive: true });
 
-  // ---------- work: filters + show all
-  const grid = $('.grid');
-  const cards = $$('.card');
-  const chips = $$('.chip');
-  const more = $('[data-more]');
-  const animate = (list) => { if (calm) return; list.forEach((c, k) => { c.classList.remove('in'); void c.offsetWidth; c.style.setProperty('--k', Math.min(k, 12)); c.classList.add('in'); }); };
-  chips.forEach((c) => c.addEventListener('click', () => {
-    const f = c.dataset.filter;
-    chips.forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
-    // a category shows all of its films; "All" goes back to the short list
-    grid.classList.toggle('all', f !== 'all');
-    cards.forEach((card) => card.classList.toggle('off', f !== 'all' && card.dataset.cat !== f));
-    animate(cards.filter((card) => card.offsetParent));
+  // ---------- work: each group shows a few films, "Show all" opens the rest
+  $$('[data-more]').forEach((btn) => btn.addEventListener('click', () => {
+    const group = btn.closest('.group');
+    group.classList.add('all');
+    if (calm) return;
+    $$('.card.extra', group).forEach((c, k) => { c.style.setProperty('--k', Math.min(k, 12)); c.classList.add('in'); });
   }));
-  if (more) more.addEventListener('click', () => {
-    grid.classList.add('all');
-    animate(cards.filter((card) => card.classList.contains('extra') && card.offsetParent));
-  });
 
   // ---------- video player
   const player = $('.player');
@@ -69,7 +58,7 @@
       queue = [{ id: 'showreel', src: 'yt:kpIHiBkN5Og', title: 'Showreel', cat: 'Alex Konstantinidis' }];
       load(0);
     } else {
-      queue = cards.filter((c) => c.offsetParent).map((c) => { const x = $('a', c); return { id: x.dataset.play, src: x.dataset.src, title: x.dataset.title, cat: x.dataset.cat }; });
+      queue = $$('.card', a.closest('.group')).filter((c) => c.offsetParent).map((c) => { const x = $('a', c); return { id: x.dataset.play, src: x.dataset.src, title: x.dataset.title, cat: x.dataset.cat }; });
       load(Math.max(0, queue.findIndex((q) => q.id === a.dataset.play)));
     }
     player.showModal();

@@ -54,14 +54,12 @@
         <h2 id="work-h">Work</h2>
         <p class="sec-sub">{{COUNT}} films for brands and artists. Click any film to watch it.</p>
       </div>
-      <div class="filters" role="group" aria-label="Filter by category">
-{{FILTERS}}
-      </div>
+      <nav class="tabs" aria-label="Jump to a category">
+{{TABS}}
+      </nav>
     </div>
-    <ul class="grid" role="list">
-{{CARDS}}
-    </ul>
-    <div class="more-wrap"><button type="button" class="btn" data-more>Show all {{COUNT}} films</button></div>
+{{GROUPS}}
+
   </section>
 
   <section class="about" id="about" aria-labelledby="about-h">

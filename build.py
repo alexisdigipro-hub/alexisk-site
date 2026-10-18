@@ -30,31 +30,39 @@ def attrs(w):
 
 cats = ['Commercial', 'Music Video', 'Fashion & Art', 'Documentary']
 count = {c: sum(w['cat'] == c for w in works) for c in cats}
-filters = [f'        <button type="button" class="chip" data-filter="all" aria-pressed="true">All <sup>{len(works)}</sup></button>']
-filters += [f'        <button type="button" class="chip" data-filter="{slug(c)}" aria-pressed="false">{e(c)} <sup>{count[c]}</sup></button>' for c in cats]
 
-# featured films first, then the rest in their original order
-order = data['featured'] + [w['id'] for w in works if w['id'] not in data['featured']]
-cards = []
-for n, i in enumerate(order):
-    w = by_id[i]
-    cards.append(f'''      <li class="card{' extra' if n >= 12 else ''}" data-cat="{slug(w["cat"])}">
-        <a {attrs(w)}>
-          <span class="ph"><img src="img/{i}-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
-          <span class="card-t"{lang(full(w))}>{e(w["title"])}{f' <em>{e(w["sub"])}</em>' if w.get("sub") else ''}</span>
-          <span class="card-c">{e(w["cat"])}</span>
-        </a>
-      </li>''')
+# the work page is split into clear groups; featured films lead each group
+GROUPS = [('commercials', 'Commercials', ['Commercial']),
+          ('music-videos', 'Music videos', ['Music Video']),
+          ('documentary-fashion', 'Documentary & fashion', ['Documentary', 'Fashion & Art'])]
+SHOW = 8  # films visible per group before "Show all"
+rank = {i: n for n, i in enumerate(data['featured'])}
 
-clients = []
-for w in works:
-    if w['title'] not in clients and not w['title'].startswith('#'):
-        clients.append(w['title'])
-marquee = ''.join(f'<span>{e(c)}</span><i>✦</i>' for c in clients)
+
+def card(w, hidden):
+    return f'''        <li class="card{' extra' if hidden else ''}">
+          <a {attrs(w)}>
+            <span class="ph"><img src="img/{w["id"]}-s.jpg" alt="" loading="lazy" width="720" height="405"><span class="play" aria-hidden="true"></span></span>
+            <span class="card-t"{lang(full(w))}>{e(w["title"])}{f' <em>{e(w["sub"])}</em>' if w.get("sub") else ''}</span>
+          </a>
+        </li>'''
+
+
+tabs, groups = [], []
+for gid, name, gcats in GROUPS:
+    items = sorted((w for w in works if w['cat'] in gcats), key=lambda w: rank.get(w['id'], 99))
+    tabs.append(f'        <a class="chip" href="#{gid}">{e(name)} <sup>{len(items)}</sup></a>')
+    more = (f'\n      <button type="button" class="btn more" data-more>Show all {len(items)}</button>' if len(items) > SHOW else '')
+    groups.append(f'''    <div class="group" id="{gid}">
+      <div class="group-head"><h3>{e(name)}</h3><span class="group-n">{len(items)} films</span></div>
+      <ul class="grid" role="list">
+{chr(10).join(card(w, n >= SHOW) for n, w in enumerate(items))}
+      </ul>{more}
+    </div>''')
 
 out = (ROOT / 'template.html').read_text(encoding='utf-8')
 for k, v in {
-    'CARDS': '\n'.join(cards), 'FILTERS': '\n'.join(filters), 
+    'GROUPS': '\n'.join(groups), 'TABS': '\n'.join(tabs),
     'COUNT': str(len(works)),
     'N_COMMERCIAL': str(count['Commercial']), 'N_MUSIC': str(count['Music Video']),
     'N_ART': str(count['Fashion & Art']), 'N_DOC': str(count['Documentary']),
