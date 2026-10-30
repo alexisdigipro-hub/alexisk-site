@@ -26,66 +26,55 @@
   const more = $('[data-more]');
   if (more) more.addEventListener('click', () => { grid.classList.add('all'); animate(tiles.filter((t) => t.classList.contains('extra'))); });
 
-  // ---------- themadlions.com's newest work, on the page at once (Alex, 30 Oct: "new projects there come here by
-  // themselves"). build.py puts them in the page every few hours; this adds any film added since, with the same rules
-  // (build.py tml_clean / tml_cat), after everything else. Nothing changes when it cannot be reached.
-  const TML = 'https://naibamqexcqnqhbbqafa.supabase.co/rest/v1/site_works?visible=eq.true&video_id=not.is.null&select=title,categories,kind,video_id&order=position.asc,created_at.desc';
-  const TML_KEY = 'sb_publishable_o1OB_ohozPq1Xr2jg2ZSHA_3GsusXFL';
-  const LABEL = { 'Commercial': 'Commercials', 'Music Video': 'Music Videos', 'Fashion & Art': 'Fashion & Art', 'Documentary': 'Documentary', 'Film': 'Films' };
-  const slug = (c) => c.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '');
-  const clean = (t) => {
-    t = t.replace(/\s+/g, ' ').trim().split(' / ')[0].replace(/\s*\|.*$/, '').replace(/\s*\((?:official|4k)[^)]*\)/gi, '')
-      .replace(/\s*[-–]\s*official (?:music )?video(?:clip)?\s*$/i, '').replace(/\s*official (?:music )?video(?:clip)?\s*$/i, '').replace(/^[\s–-]+|[\s–-]+$/g, '');
-    const m = t.split(/\s+[–-]\s+/);
-    return [m[0].trim(), m.slice(1).join(' - ').trim()];
+  // ---------- Alex's order and themadlions.com's newest work (tml.js). build.py puts both in the page every few hours;
+  // this brings in what changed since: a film added on themadlions.com, a new order or a film hidden or shown again in
+  // alexisk.gr/admin/. The first SHOW films are on the home page, the rest behind "Show all work". Nothing changes when
+  // the database cannot be reached.
+  const A = window.ALEXISK;
+  const filmOf = (t) => ({ id: t.dataset.play, src: t.dataset.src, title: t.dataset.title, cat: t.dataset.cat, el: t });
+  const tileOf = (f) => {
+    const full = f.title + (f.sub ? ' · ' + f.sub : '');
+    const a = document.createElement('a');
+    a.className = 'tile';
+    Object.assign(a.dataset, { group: A.slug(f.cat), play: f.id, src: f.src, title: full, cat: f.cat });
+    const [kind, vid] = f.src.split(':');
+    a.href = kind === 'yt' ? `https://www.youtube.com/watch?v=${vid}` : `https://vimeo.com/${vid}`;
+    a.target = '_blank'; a.rel = 'noopener';
+    const img = document.createElement('img');
+    img.src = f.thumb; img.alt = ''; img.loading = 'lazy'; img.width = 720; img.height = 405;
+    const play = document.createElement('span'); play.className = 'play'; play.setAttribute('aria-hidden', 'true');
+    play.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>';
+    const cap = document.createElement('span'); cap.className = 'cap';
+    const strong = document.createElement('strong'); strong.textContent = full;
+    if (/[\u0370-\u03ff\u1f00-\u1fff]/.test(full)) strong.lang = 'el';
+    const lab = document.createElement('span'); lab.textContent = A.LABEL[f.cat];
+    cap.append(strong, lab); a.append(img, play, cap);
+    return a;
   };
-  const catOf = (r) => {
-    const c = r.categories || [];
-    if (c.includes('Music Videos') || (!c.length && /official (music )?video|videoclip/i.test(r.title))) return 'Music Video';
-    if (c.includes('Films')) return 'Film';
-    return 'Commercial';
+  const filterBtn = (cat) => {
+    if ($(`.filters [data-filter="${A.slug(cat)}"]`)) return;
+    const b = document.createElement('button'); b.type = 'button'; b.dataset.filter = A.slug(cat); b.textContent = A.LABEL[cat];
+    $('.filters').append(b);
+    b.addEventListener('click', () => {
+      $$('.filters button').forEach((x) => x.classList.toggle('on', x === b));
+      grid.classList.add('all');
+      tiles.forEach((t) => t.classList.toggle('off', t.dataset.group !== b.dataset.filter));
+      animate(tiles.filter((t) => t.offsetParent));
+    });
   };
-  if (grid && window.fetch) fetch(TML, { headers: { apikey: TML_KEY, Authorization: `Bearer ${TML_KEY}` } })
-    .then((r) => (r.ok ? r.json() : []))
-    .then((rows) => {
-      const have = new Set([...$$('[data-src]')].map((a) => a.dataset.src.split(':')[1]));
-      let added = 0;
-      for (const r of rows) {
-        const kind = r.kind || 'yt', vid = r.video_id;
-        if (!vid || !['yt', 'vm'].includes(kind) || have.has(vid) || (r.categories || []).includes('Behind the Scenes')) continue;
-        have.add(vid);
-        const [title, sub] = clean(r.title), cat = catOf(r), full = title + (sub ? ' · ' + sub : '');
-        const a = document.createElement('a');
-        a.className = 'tile extra';
-        Object.assign(a.dataset, { group: slug(cat), play: `tml-${vid}`, src: `${kind}:${vid}`, title: full, cat });
-        a.href = kind === 'yt' ? `https://www.youtube.com/watch?v=${vid}` : `https://vimeo.com/${vid}`;
-        a.target = '_blank'; a.rel = 'noopener';
-        const img = document.createElement('img');
-        img.src = kind === 'yt' ? `https://i.ytimg.com/vi/${vid}/hqdefault.jpg` : `https://vumbnail.com/${vid}.jpg`;
-        img.alt = ''; img.loading = 'lazy'; img.width = 720; img.height = 405;
-        const play = document.createElement('span'); play.className = 'play'; play.setAttribute('aria-hidden', 'true');
-        play.innerHTML = '<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>';
-        const cap = document.createElement('span'); cap.className = 'cap';
-        const strong = document.createElement('strong'); strong.textContent = full;
-        if (/[\u0370-\u03ff\u1f00-\u1fff]/.test(full)) strong.lang = 'el';
-        const lab = document.createElement('span'); lab.textContent = LABEL[cat];
-        cap.append(strong, lab); a.append(img, play, cap);
-        grid.append(a); tiles.push(a); added++;
-        // a category the page did not have yet gets its filter
-        if (!$(`.filters [data-filter="${slug(cat)}"]`)) {
-          const b = document.createElement('button'); b.type = 'button'; b.dataset.filter = slug(cat); b.textContent = LABEL[cat];
-          $('.filters').append(b);
-          b.addEventListener('click', () => {
-            $$('.filters button').forEach((x) => x.classList.toggle('on', x === b));
-            grid.classList.add('all');
-            tiles.forEach((t) => t.classList.toggle('off', t.dataset.group !== b.dataset.filter));
-            animate(tiles.filter((t) => t.offsetParent));
-          });
-        }
-      }
-      if (added && more) more.textContent = more.textContent.replace(/\d+/, String(tiles.length));
-    })
-    .catch(() => {});
+  if (grid && A && window.fetch) {
+    const have = new Set(tiles.map((t) => t.dataset.src.split(':')[1]));
+    Promise.all([A.order().catch(() => null), A.tmlFilms(have).catch(() => [])]).then(([ord, fresh]) => {
+      if (!ord && !fresh.length) return;
+      const films = [...tiles.map(filmOf), ...fresh.map((f) => ({ ...f, el: tileOf(f) }))];
+      const shown = ord ? A.arrange(films, ord) : films.filter((f) => !f.el.classList.contains('gone'));
+      const on = new Set(shown.map((f) => f.id));
+      films.forEach((f) => { if (!on.has(f.id)) { f.el.classList.add('gone'); grid.append(f.el); } });
+      shown.forEach((f, n) => { f.el.classList.remove('gone'); f.el.classList.toggle('extra', n >= A.SHOW); grid.append(f.el); filterBtn(f.cat); });
+      tiles.length = 0; tiles.push(...films.map((f) => f.el));
+      if (more) { more.textContent = more.textContent.replace(/\d+/, String(shown.length)); more.parentElement.hidden = shown.length <= A.SHOW; }
+    });
+  }
 
   // ---------- contact: pick a type, write a line, it opens the email app ready to send
   const brief = $('[data-brief]');
