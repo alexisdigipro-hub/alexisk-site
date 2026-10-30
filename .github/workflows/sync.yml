@@ -1,0 +1,28 @@
+# themadlions.com's work on alexisk.gr (Alex, 30 Oct: "new projects there come here by themselves"): every three hours
+# the films in themadlions.com's admin are read, index.html is built again, and when something changed it is pushed to
+# main; Plesk's GitHub webhook deploys the push. app.js also shows a newer film on the page right away.
+name: Sync themadlions.com work
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: sync
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python3 build.py --sync
+      - name: Push when something changed
+        run: |
+          if git diff --quiet -- data/themadlions.json; then echo "nothing new"; exit 0; fi
+          git config user.name "alexisk.gr sync"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/themadlions.json index.html
+          git commit -m "New work from themadlions.com"
+          git push
