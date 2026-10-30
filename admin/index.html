@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>alexisk.gr · Admin</title>
+<meta name="theme-color" content="#0b0b0c">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+<!-- alexisk.gr's admin (Alex, 30 Oct 2026: "a backend like themadlions, to set the order I see the projects in").
+     Sign in with a THEMADLIONS Hub account; only hub administrators get in, and the database checks the same thing
+     (is_admin) on every write. Drag a film to move it, the eye hides it; every change is saved at once in the hub's
+     table alexisk_site, the page reads it on every visit. Plain fetch to Supabase, no libraries. -->
+<style>
+:root { --bg: #0b0b0c; --text: #f2f0ec; --muted: #9a978f; --dim: #6c6a64; --edge: rgba(255,255,255,.1); --edge-2: rgba(255,255,255,.18);
+  --glass: rgba(255,255,255,.06); --glass-2: rgba(255,255,255,.11); --red: #d40000; --r: 18px; --pad: clamp(16px, 3vw, 40px); }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--text); font: 400 15px/1.5 Jost, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+body::before { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(900px 600px at 85% -10%, rgba(212,0,0,.16), transparent 60%), radial-gradient(700px 500px at 0% 100%, rgba(255,255,255,.05), transparent 60%); }
+button, input { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+.wm { font-weight: 300; letter-spacing: .14em; font-size: 15px; white-space: nowrap; }
+.wm b { font-weight: 800; }
+.pill { color: var(--text); height: 40px; padding: 0 18px; border: 0; border-radius: 99px; background: var(--glass); box-shadow: inset 0 0 0 1px var(--edge); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 500; transition: background .18s, transform .12s; }
+.pill:hover { background: var(--glass-2); }
+.pill:active { transform: scale(.97); }
+.pill.main { background: var(--red); box-shadow: 0 8px 26px rgba(212,0,0,.35); color: #fff; }
+.pill svg { width: 17px; height: 17px; }
+
+/* the door */
+.door { min-height: 100svh; display: grid; place-items: center; padding: 20px; }
+.door form { width: min(400px, 100%); display: grid; gap: 14px; padding: 30px 26px; border-radius: 26px; background: rgba(22,22,24,.7); box-shadow: inset 0 0 0 1px var(--edge-2), 0 30px 80px rgba(0,0,0,.5); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+.door h1 { margin: 6px 0 0; font-size: 26px; font-weight: 500; }
+.door p { margin: 0; color: var(--muted); }
+.door input { height: 48px; padding: 0 18px; border: 0; border-radius: 99px; background: var(--glass); box-shadow: inset 0 0 0 1px var(--edge); outline: none; }
+.door input:focus { box-shadow: inset 0 0 0 1px var(--edge-2), 0 0 0 3px rgba(212,0,0,.25); }
+.door .pill { height: 48px; justify-content: center; }
+.door .msg { color: #ff6b62; min-height: 1.5em; font-size: 14px; }
+
+/* the work */
+.top { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: calc(14px + env(safe-area-inset-top)) var(--pad) 14px; background: rgba(11,11,12,.72); -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%); border-bottom: 1px solid var(--edge); }
+.top h1 { margin: 0 auto 0 8px; font-size: 22px; font-weight: 600; }
+.top .state { color: var(--muted); font-size: 13.5px; }
+main { padding: 22px var(--pad) 60px; }
+.hint { margin: 0 0 18px; color: var(--muted); max-width: 70ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.f { position: relative; border-radius: var(--r); overflow: hidden; background: var(--glass); box-shadow: inset 0 0 0 1px var(--edge); cursor: grab; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; touch-action: pan-y; transition: opacity .2s, box-shadow .2s; }
+.f:hover { box-shadow: inset 0 0 0 1px var(--edge-2); }
+.f img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; pointer-events: none; -webkit-user-drag: none; background: #18181b; }
+.f .cap { padding: 9px 12px 11px; display: grid; gap: 1px; }
+.f .cap strong { font-weight: 500; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.f .cap span { color: var(--muted); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.f .no { position: absolute; top: 8px; left: 8px; min-width: 28px; height: 24px; padding: 0 8px; border-radius: 99px; background: rgba(0,0,0,.62); font-size: 12px; font-weight: 600; display: grid; place-items: center; }
+.f .new { position: absolute; left: 8px; top: 38px; height: 20px; padding: 0 8px; border-radius: 99px; background: var(--red); font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; display: grid; place-items: center; }
+.f .acts { position: absolute; top: 8px; right: 8px; display: flex; gap: 6px; }
+.f .acts button { width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(0,0,0,.6); color: #fff; display: grid; place-items: center; cursor: pointer; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.f .acts button:hover { background: rgba(0,0,0,.8); }
+.f .acts svg { width: 17px; height: 17px; }
+.f.ph { opacity: .25; }
+.ghost { position: fixed; z-index: 50; pointer-events: none; border-radius: var(--r); overflow: hidden; box-shadow: 0 0 0 2px var(--red), 0 20px 60px rgba(212,0,0,.3); transform: rotate(-1.5deg) scale(1.04); opacity: .95; }
+.cut { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; color: var(--muted); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; padding: 6px 2px; }
+.cut::before, .cut::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--red), transparent); }
+h2 { margin: 40px 0 6px; font-size: 18px; font-weight: 600; }
+.off .f { opacity: .55; cursor: default; }
+.off .f:hover { opacity: .9; }
+.empty { color: var(--dim); }
+.toast { position: fixed; left: 50%; bottom: calc(22px + env(safe-area-inset-bottom)); z-index: 60; transform: translate(-50%, 16px); padding: 11px 18px; border-radius: 99px; background: rgba(28,28,32,.95); box-shadow: inset 0 0 0 1px var(--edge-2), 0 14px 40px rgba(0,0,0,.45); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+@media (max-width: 640px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .top h1 { font-size: 18px; margin-left: 0; }
+  .top .wm, .top .state { display: none; }
+  .pill .w { display: none; }
+  .pill { padding: 0 12px; }
+  .f .cap strong { font-size: 13px; }
+  .f .acts button { width: 30px; height: 30px; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eyeoff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-top" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14M12 20V9M7 13l5-5 5 5"/></symbol>
+  <symbol id="i-site" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4M10 17l-5-5 5-5M5 12h11"/></symbol>
+</svg>
+
+<div class="door" id="door" hidden>
+  <form id="login">
+    <span class="wm">ALEX<b>KONSTANTINIDIS</b></span>
+    <h1>Admin</h1>
+    <p>Sign in with your THEMADLIONS Hub account.</p>
+    <input name="email" type="email" autocomplete="email" placeholder="Email" required>
+    <input name="password" type="password" autocomplete="current-password" placeholder="Password" required>
+    <button class="pill main" id="loginBtn">Sign in</button>
+    <span class="msg" id="loginMsg"></span>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <header class="top">
+    <span class="wm">ALEX<b>KONSTANTINIDIS</b></span>
+    <h1>Work order</h1>
+    <span class="state" id="state"></span>
+    <a class="pill" href="../" target="_blank" rel="noopener"><svg><use href="#i-site"/></svg><span class="w">View site</span></a>
+    <button class="pill" id="signout" type="button"><svg><use href="#i-out"/></svg><span class="w">Sign out</span></button>
+  </header>
+  <main>
+    <p class="hint">Drag a film to move it (on a phone, hold it for a moment first). The first 25 are on the home page, the rest open with Show all work. The eye hides a film from alexisk.gr. New films from themadlions.com come in first, marked New. Every change is saved at once.</p>
+    <div class="grid" id="list"></div>
+    <h2>Hidden</h2>
+    <p class="hint">Not on alexisk.gr. The eye brings one back, at the end of the list.</p>
+    <div class="grid off" id="gone"></div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="../tml.js"></script>
+<script>
+(() => {
+  'use strict';
+  const A = window.ALEXISK;
+  const $ = (id) => document.getElementById(id);
+  const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  let toastT;
+  const toast = (t) => { const el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('on'), 2400); };
+
+  /* ---------- the session: the hub's own accounts, kept in this browser ---------- */
+  let session = null;
+  try { session = JSON.parse(localStorage.getItem('alexisk_admin') || 'null'); } catch (e) {}
+  const keep = (s) => { session = s; try { s ? localStorage.setItem('alexisk_admin', JSON.stringify(s)) : localStorage.removeItem('alexisk_admin'); } catch (e) {} };
+  async function auth(grant, body) {
+    const r = await fetch(`${A.BASE}/auth/v1/token?grant_type=${grant}`, { method: 'POST', headers: { apikey: A.KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error_description || j.msg || 'Could not sign in.');
+    return { access: j.access_token, refresh: j.refresh_token, until: Date.now() + (j.expires_in || 3600) * 1000 - 60000 };
+  }
+  async function token() {
+    if (!session) throw new Error('Signed out');
+    if (Date.now() > session.until) keep(await auth('refresh_token', { refresh_token: session.refresh }));
+    return session.access;
+  }
+  async function rest(path, opts = {}) {
+    const r = await fetch(`${A.BASE}/rest/v1/${path}`, { ...opts, headers: { apikey: A.KEY, Authorization: `Bearer ${await token()}`, 'Content-Type': 'application/json', ...(opts.headers || {}) } });
+    if (r.status === 401) { keep(null); door(); throw new Error('Signed out'); }
+    if (!r.ok) { const j = await r.json().catch(() => ({})); throw new Error(j.message || `Error ${r.status}`); }
+    return r.status === 204 ? null : r.json().catch(() => null);
+  }
+  const isAdmin = async () => (await rest('rpc/is_admin', { method: 'POST', body: '{}' })) === true;
+  const door = () => { $('app').hidden = true; $('door').hidden = false; };
+  $('login').onsubmit = async (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    $('loginBtn').disabled = true; $('loginMsg').textContent = '';
+    try {
+      keep(await auth('password', { email: f.get('email').trim(), password: f.get('password') }));
+      if (!(await isAdmin())) { keep(null); throw new Error('This account is not an administrator of THEMADLIONS Hub.'); }
+      start();
+    } catch (err) { $('loginMsg').textContent = err.message; } finally { $('loginBtn').disabled = false; }
+  };
+  $('signout').onclick = () => { keep(null); door(); };
+
+  /* ---------- the films ---------- */
+  let shown = [], hidden = [], placed = new Set();
+  async function start() {
+    $('door').hidden = true; $('app').hidden = false;
+    $('state').textContent = 'Loading…';
+    try {
+      if (!(await isAdmin())) { keep(null); door(); return; }
+      const films = await fetch('films.json', { cache: 'no-store' }).then((r) => r.json());
+      const have = new Set(films.map((f) => f.src.split(':')[1]));
+      const [fresh, ord] = await Promise.all([A.tmlFilms(have).catch(() => []), A.order()]);
+      const all = [...films, ...fresh];
+      placed = new Set(ord.ord);
+      shown = A.arrange(all, ord);
+      const off = new Set(ord.hidden);
+      hidden = all.filter((f) => off.has(f.id));
+      draw();
+    } catch (err) { $('state').textContent = 'Could not load: ' + err.message; }
+  }
+  const thumb = (f) => (/^https?:/.test(f.thumb) ? f.thumb : '../' + f.thumb);
+  const card = (f, n, isOff) => `<div class="f" data-id="${esc(f.id)}">
+      <img src="${esc(thumb(f))}" alt="" loading="lazy">
+      ${isOff ? '' : `<span class="no">${n + 1}</span>`}
+      ${!isOff && placed.size && !placed.has(f.id) ? '<span class="new">New</span>' : ''}
+      <span class="acts">
+        ${isOff ? '' : `<button type="button" data-act="top" title="Move to the top" aria-label="Move to the top"><svg><use href="#i-top"/></svg></button>`}
+        <button type="button" data-act="eye" title="${isOff ? 'Show on alexisk.gr' : 'Hide from alexisk.gr'}" aria-label="${isOff ? 'Show' : 'Hide'}"><svg><use href="#i-${isOff ? 'eyeoff' : 'eye'}"/></svg></button>
+      </span>
+      <span class="cap"><strong>${esc(f.title + (f.sub ? ' · ' + f.sub : ''))}</strong><span>${esc(A.LABEL[f.cat] || f.cat)}</span></span>
+    </div>`;
+  function draw() {
+    const cells = shown.map((f, n) => card(f, n, false));
+    if (shown.length > A.SHOW) cells.splice(A.SHOW, 0, `<div class="cut">Above: the home page · below: Show all work</div>`);
+    $('list').innerHTML = cells.join('');
+    $('gone').innerHTML = hidden.length ? hidden.map((f) => card(f, 0, true)).join('') : '<p class="empty">Nothing hidden.</p>';
+    $('state').textContent = `${shown.length} films · ${Math.min(A.SHOW, shown.length)} on the home page${hidden.length ? ` · ${hidden.length} hidden` : ''}`;
+  }
+
+  /* ---------- saving: every change, a moment later ---------- */
+  let saveT;
+  const save = () => {
+    clearTimeout(saveT);
+    saveT = setTimeout(async () => {
+      try {
+        await rest('alexisk_site?id=eq.1', { method: 'PATCH', headers: { Prefer: 'return=minimal' },
+          body: JSON.stringify({ ord: shown.map((f) => f.id), hidden: hidden.map((f) => f.id), updated_at: new Date().toISOString() }) });
+        placed = new Set(shown.map((f) => f.id));
+        toast('Saved. alexisk.gr shows it now.');
+      } catch (err) { toast('Not saved: ' + err.message); }
+    }, 500);
+  };
+
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    const id = b.closest('.f').dataset.id;
+    if (b.dataset.act === 'top') { const i = shown.findIndex((f) => f.id === id); shown.unshift(...shown.splice(i, 1)); }
+    else if (shown.some((f) => f.id === id)) { const i = shown.findIndex((f) => f.id === id); hidden.unshift(...shown.splice(i, 1)); }
+    else { const i = hidden.findIndex((f) => f.id === id); shown.push(...hidden.splice(i, 1)); }
+    draw(); save();
+  });
+
+  /* ---------- dragging: a mouse moves at once, a finger after holding a moment ---------- */
+  const list = $('list');
+  let drag = null;
+  list.addEventListener('pointerdown', (e) => {
+    const el = e.target.closest('.f');
+    if (!el || e.target.closest('button') || e.button > 0) return;
+    const d = { el, id: el.dataset.id, x: e.clientX, y: e.clientY, touch: e.pointerType !== 'mouse', on: false, pid: e.pointerId };
+    if (d.touch) d.hold = setTimeout(() => begin(d), 300);
+    drag = d;
+  });
+  function begin(d) {
+    d.on = true;
+    const r = d.el.getBoundingClientRect();
+    d.dx = d.x - r.left; d.dy = d.y - r.top;
+    d.ghost = d.el.cloneNode(true); d.ghost.classList.add('ghost');
+    Object.assign(d.ghost.style, { width: r.width + 'px', left: r.left + 'px', top: r.top + 'px' });
+    document.body.append(d.ghost);
+    d.el.classList.add('ph');
+    if (navigator.vibrate) navigator.vibrate(12);
+  }
+  let scrollV = 0, scrollRaf = 0;
+  const autoScroll = () => { if (!scrollV) { scrollRaf = 0; return; } scrollBy(0, scrollV); scrollRaf = requestAnimationFrame(autoScroll); };
+  addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const far = Math.hypot(e.clientX - drag.x, e.clientY - drag.y) > 6;
+    if (!drag.on) {
+      if (drag.touch) { if (far) { clearTimeout(drag.hold); drag = null; } return; }
+      if (!far) return;
+      begin(drag);
+    }
+    e.preventDefault();
+    drag.ghost.style.left = e.clientX - drag.dx + 'px';
+    drag.ghost.style.top = e.clientY - drag.dy + 'px';
+    const edge = 70;
+    scrollV = e.clientY < edge + 60 ? -12 : e.clientY > innerHeight - edge ? 12 : 0;
+    if (scrollV && !scrollRaf) scrollRaf = requestAnimationFrame(autoScroll);
+    const over = document.elementFromPoint(e.clientX, e.clientY);
+    const t = over && over.closest('#list .f');
+    if (!t || t === drag.el) return;
+    const kids = [...list.querySelectorAll('.f')];
+    const from = kids.indexOf(drag.el), to = kids.indexOf(t);
+    t.parentNode.insertBefore(drag.el, to > from ? t.nextSibling : t);
+  }, { passive: false });
+  // a held finger must not scroll the page while it drags
+  list.addEventListener('touchmove', (e) => { if (drag && drag.on) e.preventDefault(); }, { passive: false });
+  const end = () => {
+    if (!drag) return;
+    clearTimeout(drag.hold); scrollV = 0;
+    if (drag.on) {
+      drag.ghost.remove(); drag.el.classList.remove('ph');
+      const ids = [...list.querySelectorAll('.f')].map((x) => x.dataset.id);
+      const by = new Map(shown.map((f) => [f.id, f]));
+      const before = shown.map((f) => f.id).join();
+      shown = ids.map((id) => by.get(id));
+      draw();
+      if (ids.join() !== before) save();
+    }
+    drag = null;
+  };
+  addEventListener('pointerup', end);
+  addEventListener('pointercancel', end);
+  list.addEventListener('contextmenu', (e) => { if (drag) e.preventDefault(); });
+
+  if (session) start(); else door();
+})();
+</script>
+</body>
+</html>

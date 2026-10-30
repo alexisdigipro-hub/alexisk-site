@@ -89,10 +89,10 @@ h2 b { font-weight: 800; }
   background: color-mix(in srgb, var(--hi) 14%, transparent); border: 1px solid color-mix(in srgb, var(--hi) 30%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); opacity: 0; transform: scale(.85); transition: opacity .3s, transform .3s; }
 .play svg { width: 16px; margin-left: 3px; fill: #fff; }
 .tile:hover .play, .tile:focus-visible .play { opacity: 1; transform: none; }
-.tile.off { display: none; }
+.tile.off, .tile.gone { display: none; }
 html.js .grid:not(.all) .tile.extra { display: none; }
 .more-wrap { display: flex; justify-content: center; margin-top: 34px; }
-.grid.all + .more-wrap { display: none; }
+.grid.all + .more-wrap, .more-wrap[hidden] { display: none; }
 html.js .tile.in { animation: tin .5s ease both; animation-delay: calc(var(--k, 0) * 35ms); }
 @keyframes tin { from { opacity: 0; transform: translateY(12px); } }
 

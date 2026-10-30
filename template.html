@@ -59,7 +59,7 @@
     <div class="grid">
 {{TILES}}
     </div>
-    <div class="more-wrap"><button type="button" class="pill" data-more>Show all work ({{COUNT}})</button></div>
+    <div class="more-wrap"{{MORE_HIDDEN}}><button type="button" class="pill" data-more>Show all work ({{SHOWN}})</button></div>
   </section>
 
   <section id="make" class="make">
@@ -135,6 +135,7 @@
   </div>
 </div>
 
+<script src="tml.js?v={{VER}}" defer></script>
 <script src="app.js?v={{VER}}" defer></script>
 </body>
 </html>
